@@ -16,8 +16,11 @@ const clearDom = () => {
   }
 };
 
-export const insertCustomElementIntoDom = name => {
+export const insertCustomElementIntoDom = (name, attributes = {}) => {
   insertTestRoot();
   const x = document.createElement(name);
+  Object.keys(attributes).forEach(attrName => {
+    x.setAttribute(attrName, attributes[attrName]);
+  });
   testRoot().appendChild(x);
 };
