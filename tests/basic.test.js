@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import CustomReactElements from '../src/index';
 import { insertCustomElementIntoDom, randomSelectorName } from './utils';
 

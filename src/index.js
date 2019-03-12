@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function attributeNameToPropertyName(attributeName) {
-  return attributeName
+const attributeNameToPropertyName = attributeName =>
+  attributeName
     .replace(/^(x|data)[-_:]/i, '')
     .replace(/[-_:](.)/g, function(x, chr) {
       return chr.toUpperCase();
     });
-}
 
 const parseAttributeValue = (
   value,
@@ -17,7 +16,7 @@ const parseAttributeValue = (
   return value === 'true' ? true : value === 'false' ? false : value;
 };
 
-function getProps(el, options = {}) {
+const getProps = (el, options = {}) => {
   const props = {};
 
   for (var i = 0; i < el.attributes.length; i++) {
@@ -29,15 +28,15 @@ function getProps(el, options = {}) {
   props.container = el;
 
   return props;
-}
+};
 
-function getChildren(el) {
+const getChildren = el => {
   const fragment = document.createDocumentFragment();
   while (el.childNodes.length) {
     fragment.appendChild(el.childNodes[0]);
   }
   return fragment;
-}
+};
 
 const getRenderRoot = (element, useShadowDom) =>
   useShadowDom ? element.shadowRoot : element;

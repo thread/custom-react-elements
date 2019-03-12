@@ -6,7 +6,8 @@
   "scripts": {
     "build-dev": "yarn webpack --mode development",
     "dev-server": "yarn webpack-dev-server --config example/webpack.config.js --mode development",
-    "dev-test": "yarn karma start"
+    "dev-test": "yarn karma start",
+    "lint": "yarn eslint src example tests --ext js --ext jsx"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",

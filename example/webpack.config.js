@@ -1,6 +1,6 @@
-const config = require('../webpack.config');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const config = require('../webpack.config');
 
 module.exports = Object.assign({}, config, {
   entry: path.join(__dirname, 'example.js'),
