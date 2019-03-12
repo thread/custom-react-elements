@@ -16,11 +16,23 @@ const clearDom = () => {
   }
 };
 
-export const insertCustomElementIntoDom = (name, attributes = {}) => {
+export const insertCustomElementIntoDom = (
+  name,
+  attributes = {},
+  innerHTML = ''
+) => {
   insertTestRoot();
   const x = document.createElement(name);
   Object.keys(attributes).forEach(attrName => {
     x.setAttribute(attrName, attributes[attrName]);
   });
+
+  x.innerHTML = innerHTML;
   testRoot().appendChild(x);
+};
+
+let selectorNameIndex = 0;
+
+export const randomSelectorName = () => {
+  return `thread-test-element-${selectorNameIndex++}`;
 };
