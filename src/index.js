@@ -38,10 +38,11 @@ const parseAttributeValue = (
   } else if (isJsonObject(value)) {
     const withoutBraces = value.replace(/^{/, '').replace(/}$/, '');
     return tryToParseAndGracefullyFail(name, withoutBraces);
+  } else if (disableBooleanTransforms) {
+    return value;
+  } else {
+    return value === 'true' ? true : value === 'false' ? false : value;
   }
-
-  if (disableBooleanTransforms) return value;
-  return value === 'true' ? true : value === 'false' ? false : value;
 };
 
 const getProps = (el, options = {}) => {
