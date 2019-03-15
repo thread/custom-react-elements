@@ -127,4 +127,32 @@ describe('Rendering basic components', () => {
       done();
     });
   });
+
+  it('parses JSON arrays', () => {
+    const rawJsonAttribute = '{["Jack"]}';
+    const selector = randomSelectorName();
+    const ExampleComponent = props => {
+      expect(props.names).toEqual(['Jack']);
+      return null;
+    };
+    CustomReactElements.define(selector, ExampleComponent);
+    insertCustomElementIntoDom(selector, {
+      names: rawJsonAttribute,
+    });
+  });
+
+  it('parses JSON objects', () => {
+    const rawJsonAttribute = '{{"name": "Jack"}}';
+    const selector = randomSelectorName();
+    const ExampleComponent = props => {
+      expect(props.names).toEqual({
+        name: 'Jack',
+      });
+      return null;
+    };
+    CustomReactElements.define(selector, ExampleComponent);
+    insertCustomElementIntoDom(selector, {
+      names: rawJsonAttribute,
+    });
+  });
 });
