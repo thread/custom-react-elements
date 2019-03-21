@@ -1,8 +1,8 @@
+/* global jasmine */
+
 import React from 'react';
 import CustomReactElements from '../src/index';
 import { insertCustomElementIntoDom, randomSelectorName } from './utils';
-
-/* eslint-disable react/prop-types */
 
 describe('Rendering basic components', () => {
   it('renders them into the page', () => {
@@ -36,6 +36,27 @@ describe('Rendering basic components', () => {
     const elem = document.querySelector(selector);
 
     expect(elem.innerHTML).toEqual('<p>hello Jack</p>');
+  });
+
+  it('converts props to camelCase in React', done => {
+    const selector = randomSelectorName();
+    const ExampleComponent = props => {
+      expect(Object.keys(props)).toEqual([
+        'shouldCamelCaseThis',
+        'shouldnotcamelcasethis',
+        'container',
+        'children',
+      ]);
+
+      done();
+      return null;
+    };
+
+    CustomReactElements.define(selector, ExampleComponent);
+    insertCustomElementIntoDom(selector, {
+      'should-camel-case-this': 'Jack',
+      shouldnotcamelcasethis: 'Jack',
+    });
   });
 
   describe('boolean attributes', () => {
@@ -91,11 +112,12 @@ describe('Rendering basic components', () => {
   const getHtmlStringFromFragment = fragment =>
     [].map.call(fragment.childNodes, x => x.outerHTML).join('');
 
-  it('passes the children in as a fragment to React', () => {
+  it('passes the children in as a fragment to React', done => {
     const selector = randomSelectorName();
     const ExampleComponent = props => {
       const htmlContent = getHtmlStringFromFragment(props.children);
       expect(htmlContent).toEqual('<p>this was the children</p>');
+      done();
       return null;
     };
     CustomReactElements.define(selector, ExampleComponent);
@@ -106,6 +128,19 @@ describe('Rendering basic components', () => {
       },
       '<p>this was the children</p>'
     );
+  });
+
+  it('passes the container as a prop to React', done => {
+    const selector = randomSelectorName();
+    const ExampleComponent = props => {
+      expect(props.container).toEqual(jasmine.any(HTMLElement));
+      done();
+      return null;
+    };
+    CustomReactElements.define(selector, ExampleComponent);
+    insertCustomElementIntoDom(selector, {
+      name: 'Jack',
+    });
   });
 
   it('reacts as all the props change', done => {
@@ -128,11 +163,12 @@ describe('Rendering basic components', () => {
     });
   });
 
-  it('parses JSON arrays', () => {
+  it('parses JSON arrays', done => {
     const rawJsonAttribute = '{["Jack"]}';
     const selector = randomSelectorName();
     const ExampleComponent = props => {
       expect(props.names).toEqual(['Jack']);
+      done();
       return null;
     };
     CustomReactElements.define(selector, ExampleComponent);
@@ -141,13 +177,14 @@ describe('Rendering basic components', () => {
     });
   });
 
-  it('parses JSON objects', () => {
+  it('parses JSON objects', done => {
     const rawJsonAttribute = '{{"name": "Jack"}}';
     const selector = randomSelectorName();
     const ExampleComponent = props => {
       expect(props.names).toEqual({
         name: 'Jack',
       });
+      done();
       return null;
     };
     CustomReactElements.define(selector, ExampleComponent);
