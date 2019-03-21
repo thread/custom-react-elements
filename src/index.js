@@ -8,12 +8,38 @@ const attributeNameToPropertyName = attributeName =>
       return chr.toUpperCase();
     });
 
+const tryToParseAndGracefullyFail = (attributeName, rawValue) => {
+  try {
+    return JSON.parse(rawValue);
+  } catch (e) {
+    console.error(
+      'custom-react-elements error',
+      `parsing ${attributeName} to JSON failed. The raw JSON I tried to parse was`,
+      rawValue,
+      `and the error I got was`,
+      e.message,
+      e
+    );
+  }
+};
+
 const parseAttributeValue = (
+  name,
   value,
   { disableBooleanTransforms = false } = {}
 ) => {
-  if (disableBooleanTransforms) return value;
-  return value === 'true' ? true : value === 'false' ? false : value;
+  const extractedArray = /^\{(\[.*\])\}$/.exec(value);
+  const extractedObject = /^\{(\{.*\})\}$/.exec(value);
+
+  if (extractedArray) {
+    return tryToParseAndGracefullyFail(name, extractedArray[1]);
+  } else if (extractedObject) {
+    return tryToParseAndGracefullyFail(name, extractedObject[1]);
+  } else if (disableBooleanTransforms) {
+    return value;
+  } else {
+    return value === 'true' ? true : value === 'false' ? false : value;
+  }
 };
 
 const getProps = (el, options = {}) => {
@@ -22,7 +48,7 @@ const getProps = (el, options = {}) => {
   for (var i = 0; i < el.attributes.length; i++) {
     var attribute = el.attributes[i];
     var name = attributeNameToPropertyName(attribute.name);
-    props[name] = parseAttributeValue(attribute.value, options);
+    props[name] = parseAttributeValue(attribute.name, attribute.value, options);
   }
 
   props.container = el;
