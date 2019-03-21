@@ -1,11 +1,12 @@
 {
-  "name": "custom-react-elements",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "@teamthread/custom-react-elements",
+  "version": "0.1.0",
+  "main": "dist/custom-react-elements.js",
+  "umd:main": "dist/custom-react-elements.umd.js",
   "license": "MIT",
   "scripts": {
-    "build-dev": "yarn webpack --mode development",
-    "dev-server": "yarn webpack-dev-server --config example/webpack.config.js --mode development",
+    "run-example": "yarn webpack-dev-server --config example/webpack.config.js --mode development",
+    "build": "yarn microbundle build --external react,react-dom",
     "dev-test": "yarn karma start",
     "lint": "yarn eslint src example tests --ext js --ext jsx"
   },
@@ -29,6 +30,7 @@
     "karma-chrome-launcher": "^2.2.0",
     "karma-jasmine": "^1.1.2",
     "karma-webpack": "^3.0.5",
+    "microbundle": "^0.11.0",
     "prettier": "^1.14.3",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",

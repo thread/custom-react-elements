@@ -3,8 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>Webpack App</title>
+
+    <script>this.customElements||document.write('<script src="//unpkg.com/document-register-element"><\x2fscript>');</script>
+<script src="//unpkg.com/built-in-element"></script>
   </head>
   <body>
-    <react-example-component></react-example-component>
+    <basic-component></basic-component>
+
+    <component-with-props
+      name="Jack"
+      demo-object='{{"name":"Jack", "age": 26}}'>
+    </component-with-props>
+
   </body>
 </html>

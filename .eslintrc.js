@@ -5,4 +5,7 @@ module.exports = {
       version: '16.5',
     },
   },
+  rules: {
+    'react/prop-types': 'off',
+  },
 };

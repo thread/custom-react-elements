@@ -27,7 +27,24 @@ module.exports = function(config) {
         rules: [
           {
             test: /\.jsx?$/,
-            use: 'babel-loader',
+            use: {
+              loader: 'babel-loader',
+              options: {
+                presets: [
+                  '@babel/react',
+                  [
+                    '@babel/preset-env',
+                    {
+                      modules: false,
+                      debug: false,
+                      targets: {
+                        browsers: ['>0.25%'],
+                      },
+                    },
+                  ],
+                ],
+              },
+            },
           },
         ],
       },

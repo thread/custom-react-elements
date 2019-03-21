@@ -1,4 +1,5 @@
-import App from './component';
+import { BasicComponent, ComponentWithProps } from './component';
 import CustomReactElements from '../src/index';
 
-CustomReactElements.define('react-example-component', App);
+CustomReactElements.define('basic-component', BasicComponent);
+CustomReactElements.define('component-with-props', ComponentWithProps);
