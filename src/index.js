@@ -8,10 +8,6 @@ const attributeNameToPropertyName = attributeName =>
       return chr.toUpperCase();
     });
 
-const isJsonArray = value => value.match(/^{\[.*\]}$/);
-
-const isJsonObject = value => value.match(/^{\{.*}}$/);
-
 const tryToParseAndGracefullyFail = (attributeName, rawValue) => {
   try {
     return JSON.parse(rawValue);
@@ -32,12 +28,13 @@ const parseAttributeValue = (
   value,
   { disableBooleanTransforms = false } = {}
 ) => {
-  if (isJsonArray(value)) {
-    const withoutBraces = value.replace(/\{|\}/g, '');
-    return tryToParseAndGracefullyFail(name, withoutBraces);
-  } else if (isJsonObject(value)) {
-    const withoutBraces = value.replace(/^{/, '').replace(/}$/, '');
-    return tryToParseAndGracefullyFail(name, withoutBraces);
+  const extractedArray = /^\{(\[.*\])\}$/.exec(value);
+  const extractedObject = /^\{(\{.*\})\}$/.exec(value);
+
+  if (extractedArray) {
+    return tryToParseAndGracefullyFail(name, extractedArray[1]);
+  } else if (extractedObject) {
+    return tryToParseAndGracefullyFail(name, extractedObject[1]);
   } else if (disableBooleanTransforms) {
     return value;
   } else {
