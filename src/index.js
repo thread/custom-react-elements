@@ -92,9 +92,6 @@ const CustomReactElements = {
         });
 
         observer.observe(self, {
-          childList: true,
-          subtree: true,
-          characterData: true,
           attributes: true,
         });
       }
