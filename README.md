@@ -2,13 +2,13 @@
 
 A library to render React components in a Custom Element. Please note that this library supports V1 of the custom elements spec only.
 
-## Why ?
+## Why?
 
 At Thread we are migrating from a server side rendered website to a single page client side application. This library enables us to migrate incrementally by first rendering React on the server via custom elements.
 
 _PS: if you like this, you might like [`elm-web-components`](https://github.com/thread/elm-web-components)._
 
-## Prior Art
+## Prior Art
 
 We previously used [`ReactiveElements`](https://github.com/PixelsCommander/ReactiveElements/), but that project's goal is to very strictly adhere to the web component spec (for example, by supporting [`<slot>`s](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots)). Our goal is to use custom elements as a thin wrapper to help us migrate, so `custom-react-elements` does not attempt to support the entire web component spectrum. A lot of credit for the code within this repository must go to the authors and contributors of `ReactiveElements`.
 
@@ -19,7 +19,7 @@ yarn add @teamthread/custom-react-elements
 npm install @teamthread/custom-react-elements
 ```
 
-## Example
+## Example
 
 You can find a full example in the `example` folder of this repository if you'd like to dive further into the library.
 
@@ -77,7 +77,7 @@ Additionally, you can pass JSON arrays or objects. These _have to be surrounded 
 <!-- React will see this.props.person = { name: 'alice' } -->
 ```
 
-## `container` and `children`
+## `container` and `children` properties
 
 When a React component is mounted from a custom element, it is given two additional props:
 
