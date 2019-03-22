@@ -5,7 +5,7 @@
   "umd:main": "dist/custom-react-elements.umd.js",
   "license": "MIT",
   "scripts": {
-    "run-example": "yarn webpack-dev-server --config example/webpack.config.js --mode development",
+    "example": "yarn webpack-dev-server --config example/webpack.config.js --mode development",
     "build": "yarn microbundle build --external react,react-dom",
     "dev-test": "yarn karma start",
     "lint": "yarn eslint src example tests --ext js --ext jsx"

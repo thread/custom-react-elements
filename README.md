@@ -93,7 +93,7 @@ In our experience you should try to avoid using these; we like to use custom ele
 
 A custom element that has an attribute changed will cause React to update. So if you have some other code that's swapping out attributes, React will act accordingly. Again, we recommend avoiding this if possible and having all logic within React whenever possible.
 
-## Shadow DOM
+## Shadow DOM
 
 By default, the custom elements created by this library will _not_ use the [ShadowDOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM). You can configure this when defining the component:
 
@@ -111,3 +111,16 @@ Old browsers that don't support the v1 custom elements spec (IE11, for example),
 <script>this.customElements||document.write('<script src="//unpkg.com/document-register-element"><\x2fscript>');</script>
 <script src="//unpkg.com/built-in-element"></script>
 ```
+
+## Contributing
+
+We'd welcome any contributions to this library! Please feel free to open an issue if you find any bugs, or would like thoughts on any ideas for improvements that you have.
+
+To run the repository locally, you should:
+
+- clone this repository (or fork it first if you're planning to contribute)
+- run `yarn install` to ensure you've got all dependencies set up
+- You can run `yarn run dev-test` to run the tests locally via Karma. `yarn run lint` will run ESLint.
+- Running `yarn run example` will run a small demo project that you can play with in the browser.
+
+For any new features, we ask that you provide at least one test that covers the functionality. If you're unsure or need any help, please ask :)
