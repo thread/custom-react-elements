@@ -17,6 +17,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
+            exclude: /dist/,
             presets: [
               '@babel/react',
               [
