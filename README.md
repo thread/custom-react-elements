@@ -14,8 +14,15 @@ We previously used [`ReactiveElements`](https://github.com/PixelsCommander/React
 
 ## Install
 
+For `yarn`:
+
 ```
 yarn add @teamthread/custom-react-elements
+```
+
+And for `npm`:
+
+```
 npm install @teamthread/custom-react-elements
 ```
 
@@ -95,7 +102,7 @@ A custom element that has an attribute changed will cause React to update. So if
 
 ## Shadow DOM
 
-By default, the custom elements created by this library will _not_ use the [ShadowDOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM). You can configure this when defining the component:
+By default, the custom elements created by this library will _not_ use the [ShadowDOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM). We do this because turning on the ShadowDOM stops a component inheriting CSS styles from your global styles. You can turn the ShadowDOM on when defining the component:
 
 ```js
 CustomReactElements.define('my-component', MyComponent, {
@@ -111,6 +118,8 @@ Old browsers that don't support the v1 custom elements spec (IE11, for example),
 <script>this.customElements||document.write('<script src="//unpkg.com/document-register-element"><\x2fscript>');</script>
 <script src="//unpkg.com/built-in-element"></script>
 ```
+
+You can check [caniuse.com](https://caniuse.com/#feat=custom-elementsv1) for the latest information on browsers that support the V1 spec.
 
 ## Contributing
 
