@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+window.customElementsReact = React;
+window.customElementsReactDOM = ReactDOM;
+
 const attributeNameToPropertyName = attributeName =>
   attributeName
     .replace(/^(x|data)[-_:]/i, '')
@@ -28,8 +31,8 @@ const parseAttributeValue = (
   value,
   { disableBooleanTransforms = false } = {}
 ) => {
-  const extractedArray = /^\{(\[.*\])\}$/.exec(value);
-  const extractedObject = /^\{(\{.*\})\}$/.exec(value);
+  const extractedArray = /^\{(\[[\S\s]*\])\}$/m.exec(value);
+  const extractedObject = /^\{(\{[\S\s]*\})\}$/m.exec(value);
 
   if (extractedArray) {
     return tryToParseAndGracefullyFail(name, extractedArray[1]);

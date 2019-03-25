@@ -177,11 +177,27 @@ describe('Rendering basic components', () => {
     });
   });
 
+  it('parses JSON arrays over multiple lines', done => {
+    const rawJsonAttribute = `{[
+      "Jack"
+    ]}`;
+    const selector = randomSelectorName();
+    const ExampleComponent = props => {
+      expect(props.names).toEqual(['Jack']);
+      done();
+      return null;
+    };
+    CustomReactElements.define(selector, ExampleComponent);
+    insertCustomElementIntoDom(selector, {
+      names: rawJsonAttribute,
+    });
+  });
+
   it('parses JSON objects', done => {
     const rawJsonAttribute = '{{"name": "Jack"}}';
     const selector = randomSelectorName();
     const ExampleComponent = props => {
-      expect(props.names).toEqual({
+      expect(props.person).toEqual({
         name: 'Jack',
       });
       done();
@@ -189,7 +205,28 @@ describe('Rendering basic components', () => {
     };
     CustomReactElements.define(selector, ExampleComponent);
     insertCustomElementIntoDom(selector, {
-      names: rawJsonAttribute,
+      person: rawJsonAttribute,
+    });
+  });
+
+  it('parses JSON objects over multiple lines', done => {
+    const rawJsonAttribute = `{{
+      "name": "Jack",
+          "favouriteNumber": 26
+
+    }}`;
+    const selector = randomSelectorName();
+    const ExampleComponent = props => {
+      expect(props.person).toEqual({
+        name: 'Jack',
+        favouriteNumber: 26,
+      });
+      done();
+      return null;
+    };
+    CustomReactElements.define(selector, ExampleComponent);
+    insertCustomElementIntoDom(selector, {
+      person: rawJsonAttribute,
     });
   });
 });
