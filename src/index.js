@@ -1,9 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-window.customElementsReact = React;
-window.customElementsReactDOM = ReactDOM;
-
 const attributeNameToPropertyName = attributeName =>
   attributeName
     .replace(/^(x|data)[-_:]/i, '')
