@@ -8,7 +8,7 @@
     "example": "yarn webpack-dev-server --config example/webpack.config.js --mode development",
     "build": "yarn microbundle build --external react,react-dom",
     "dev-test": "yarn karma start",
-    "lint": "yarn eslint src example tests --ext js --ext jsx",
+    "lint": "yarn eslint src tests --ext js --ext jsx",
     "test": "yarn run lint && yarn karma start --single-run",
     "prepack": "yarn karma start --single-run && yarn run lint && yarn run build"
   },
