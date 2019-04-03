@@ -4,7 +4,7 @@ A library to render React components in a Custom Element. Please note that this 
 
 ## Why?
 
-At Thread we are migrating from a server side rendered website to a single page client side application. This library enables us to migrate incrementally by first rendering React on the server via custom elements.
+This library enables us to migrate by rendering custom components with server side templating, that are then backed by React components in the browser. We can incrementally expand the React components and reduce the work done by server side rendering.
 
 _PS: if you like this, you might like [`elm-web-components`](https://github.com/thread/elm-web-components)._
 
