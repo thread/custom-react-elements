@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10.15-browsers
+      - image: circleci/node:10.23-browsers
 
     working_directory: ~/repo
 
