@@ -1,8 +1,8 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-version: 2
+version: 2.1
+
+orbs:
+  browser-tools: circleci/browser-tools@1.2.4
+
 jobs:
   build:
     docker:
@@ -13,6 +13,9 @@ jobs:
 
     steps:
       - checkout
+
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
 
       # Download and cache dependencies
       - restore_cache:
